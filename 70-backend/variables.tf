@@ -18,10 +18,11 @@ variable "environment" {
   
 }
 
-variable "vpn_tags" {
+
+variable "backend_tags" {
 
     default = {
-      component="vpn"
+      component="backend"
     }
   
 }
