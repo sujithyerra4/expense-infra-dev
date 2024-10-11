@@ -4,4 +4,5 @@ locals {
   private_subnet_id=split(",",data.aws_ssm_parameter.private_subnet_ids.value)[0]
 #  StringList --> List == ["subnet-1","subnet-2"] --> subnet[0]
 vpc_id=data.aws_ssm_parameter.vpc_id.value
+app_alb_listener_arn=data.aws_ssm_parameter.app_alb_listener_arn.value
 }

@@ -1,7 +1,7 @@
-module "alb" {
+module "app_alb" {
   source                = "terraform-aws-modules/alb/aws"
   internal              = true
-  name                  = "${local.resource_name}-app-alb"
+  name                  = "${local.resource_name}-app_alb"
   vpc_id                = local.vpc_id
   enable_deletion_protection = false
   subnets               = local.private_subnet_ids
@@ -16,7 +16,7 @@ module "alb" {
 }
 
 resource "aws_lb_listener" "HTTP" {
-  load_balancer_arn = module.alb.arn
+  load_balancer_arn = module.app_alb.arn
   port              = "80"
   protocol          = "HTTP"
 
@@ -41,9 +41,10 @@ module "records" {
       name = "*.app-${var.environment}"
       type = "A"
       alias = {
-        name    = module.alb.dns_name
-        zone_id = module.alb.zone_id # This belongs ALB internal hosted zone, not ours
+        name    = module.app_alb.dns_name
+        zone_id = module.app_alb.zone_id # This belongs ALB internal hosted zone, not ours
       }
-    },
+        allow_overwrite = true
+    }
   ]
 }

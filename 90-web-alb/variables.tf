@@ -18,16 +18,14 @@ variable "environment" {
   
 }
 
-
-variable "backend_tags" {
-
-    default = {
-      component="backend"
-    }
+variable "zone_name" {
+  default = "sujithyerra.online"
   
 }
 
-variable "zone_name" {
-  default = "sujithyerra.online"
+variable "web_alb_tags" {
+  default = {
+    component="web-alb"
+  }
   
 }
